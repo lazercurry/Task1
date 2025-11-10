@@ -31,12 +31,12 @@ class InterpolatedRasterizationAlgorithmTest {
     @Test
     @DisplayName("Конструктор бросает исключение при null дополнительных цветах")
     void constructor_ShouldThrowException_WhenAdditionalColorsAreNull() {
-    IllegalArgumentException ex1 = assertThrows(IllegalArgumentException.class,
-        () -> new GradientFillAlgorithm(color1, null, color3, p1, p2, p3, canvasWidth, canvasHeight));
-    assertEquals("Vertex colors must not be null", ex1.getMessage());
-    IllegalArgumentException ex2 = assertThrows(IllegalArgumentException.class,
-        () -> new GradientFillAlgorithm(color1, color2, null, p1, p2, p3, canvasWidth, canvasHeight));
-    assertEquals("Vertex colors must not be null", ex2.getMessage());
+        IllegalArgumentException ex1 = assertThrows(IllegalArgumentException.class,
+                () -> new GradientFillAlgorithm(color1, null, color3, p1, p2, p3, canvasWidth, canvasHeight));
+        assertEquals("Vertex colors must not be null", ex1.getMessage());
+        IllegalArgumentException ex2 = assertThrows(IllegalArgumentException.class,
+                () -> new GradientFillAlgorithm(color1, color2, null, p1, p2, p3, canvasWidth, canvasHeight));
+        assertEquals("Vertex colors must not be null", ex2.getMessage());
     }
 
     @Test
@@ -119,28 +119,6 @@ class InterpolatedRasterizationAlgorithmTest {
             return (Color) method.invoke(algo, w1, w2, w3);
         } catch (Exception e) {
             throw new RuntimeException("Failed to invoke computePixelColor method", e);
-        }
-    }
-
-    private void invokeHandlePointSwap(GradientFillAlgorithm algo) {
-        try {
-            java.lang.reflect.Method method = algo.getClass().getSuperclass()
-                    .getDeclaredMethod("onVerticesSwapped");
-            method.setAccessible(true);
-            method.invoke(algo);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to invoke onVerticesSwapped method", e);
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    private <T> T getFieldValue(Object obj, String fieldName) {
-        try {
-            java.lang.reflect.Field field = obj.getClass().getSuperclass().getDeclaredField(fieldName);
-            field.setAccessible(true);
-            return (T) field.get(obj);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to access field: " + fieldName, e);
         }
     }
 }

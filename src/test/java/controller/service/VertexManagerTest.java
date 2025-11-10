@@ -14,7 +14,6 @@ class VertexManagerTest {
         assertTrue(vm.addVertex(10, 10));
         assertTrue(vm.addVertex(20, 20));
         assertTrue(vm.addVertex(30, 30));
-        // четвёртая лишняя
         assertFalse(vm.addVertex(40, 40));
         assertEquals(AlgorithmConstants.MAX_TRIANGLE_POINTS, vm.getVertices().size());
         assertTrue(vm.hasEnoughVertices());
@@ -28,7 +27,6 @@ class VertexManagerTest {
         vm.addVertex(100, 100);
         assertTrue(vm.removeNearestVertex(12, 12, AlgorithmConstants.POINT_DELETE_RADIUS));
         assertEquals(1, vm.getVertices().size());
-        // вне радиуса
         assertFalse(vm.removeNearestVertex(300, 300, AlgorithmConstants.POINT_DELETE_RADIUS));
     }
 }
